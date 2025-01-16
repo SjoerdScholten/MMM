@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inloggen</title>
+    <link rel="stylesheet" href="../css/loginStyle.css">
 </head>
 <body>
 <h1>Inloggen</h1>
@@ -21,7 +22,7 @@
 
 <p>Heb je geen account? <a href="register_artist.php">Registreer hier!</a></p>
 
-<!-- verstuurd melding bij bij fout of succesvolle inlog -->
+<!-- Verstuurd melding bij fout of succesvolle inlog -->
 <?php if (isset($_SESSION['status'])): ?>
     <p><?php echo $_SESSION['status']; ?></p>
     <?php unset($_SESSION['status']); ?>
