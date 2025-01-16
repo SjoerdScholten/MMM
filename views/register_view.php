@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artiest Registratie</title>
-    <link rel="stylesheet" href="../css/registerStyle.css">
+    <link rel="stylesheet" href="css/registerStyle.css">
 </head>
 <body>
 <div class="navbar">
