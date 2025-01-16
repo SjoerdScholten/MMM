@@ -10,7 +10,7 @@ if (isset($_POST['login'])) {
     $wachtwoord = $_POST['wachtwoord'];
 
     // Haal de gebruiker op uit de database
-    $sql = "SELECT * FROM Artist WHERE Email = ?";
+    $sql = "SELECT * FROM Gebruiker WHERE Email = ?";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([$email]);
     $gebruiker = $stmt->fetch();

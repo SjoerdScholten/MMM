@@ -9,7 +9,7 @@
 <h1>Inloggen</h1>
 
 <!-- Formulier voor inloggen -->
-<form action="../login.php" method="POST">
+<form action="profile.php" method="POST">
     <label for="email">E-mail</label>
     <input type="email" name="email" id="email" required>
 
@@ -19,7 +19,7 @@
     <button type="submit" name="login">Inloggen</button>
 </form>
 
-<p>Heb je geen account? <a href="register_artist.php">Registreer hier!</a></p>
+<p>Heb je geen account? <a href="register.php">Registreer hier!</a></p>
 
 <!-- verstuurd melding bij bij fout of succesvolle inlog -->
 <?php if (isset($_SESSION['status'])): ?>

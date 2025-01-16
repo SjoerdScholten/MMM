@@ -3,29 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artiest Registratie</title>
+    <title>Registratie</title>
 </head>
 <body>
-<h1>Artiest Registratie</h1>
+<h2>Registreren</h2>
 
-<!-- Formulier voor registratie -->
-<form action="../register.php" method="POST" enctype="multipart/form-data">
-    <label for="naam">Artiestnaam</label>
-    <input type="text" name="naam" id="naam" required>
+<!-- Toon een foutmelding als die er is -->
+<?php if (isset($_SESSION['status'])): ?>
+    <p><?php echo $_SESSION['status']; ?></p>
+    <?php unset($_SESSION['status']); ?>
+<?php endif; ?>
 
-    <label for="email">E-mail</label>
-    <input type="email" name="email" id="email" required>
+<form action="login.php" method="POST" enctype="multipart/form-data">
+    <label for="naam">Naam:</label>
+    <input type="text" name="naam" id="naam" required><br>
 
-    <label for="wachtwoord">Wachtwoord</label>
-    <input type="password" name="wachtwoord" id="wachtwoord" required>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required><br>
 
-    <label for="profielFoto">Profiel foto</label>
-    <input type="file" name="profielFoto" id="profielFoto" accept="image/*">
+    <label for="wachtwoord">Wachtwoord:</label>
+    <input type="password" name="wachtwoord" id="wachtwoord" required><br>
 
-    <button type="submit" name="register">Registreer</button>
+    <label for="profielFoto">Profielfoto (optie):</label>
+    <input type="file" name="profielFoto" id="profielFoto"><br>
 
-
-    <p>Heb je al een account? <a href="login.php">log hier in!</a></p>
+    <button type="submit" name="register">Registreren</button>
 </form>
 </body>
 </html>

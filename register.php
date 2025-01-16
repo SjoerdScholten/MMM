@@ -6,39 +6,55 @@ session_start();
 
 // Controleer of het formulier is ingediend
 if (isset($_POST['register'])) {
-    $naam = $_POST['naam'];
-    $email = $_POST['email'];
-    $wachtwoord = $_POST['wachtwoord'];
+    // Verkrijg de gegevens uit het formulier
+    $Naam = $_POST['naam'];
+    $Email = $_POST['email'];
+    $Wachtwoord = $_POST['wachtwoord'];
 
     // Hash wachtwoord
-    $wachtwoordHash = password_hash($wachtwoord, PASSWORD_BCRYPT);
+    $wachtwoordHash = password_hash($Wachtwoord, PASSWORD_BCRYPT);
 
     // Profiel foto uploaden
     if (isset($_FILES['profielFoto']) && $_FILES['profielFoto']['error'] == 0) {
         $bestandsnaam = $_FILES['profielFoto']['name'];
         $bestemmingsmap = 'uploads/' . $bestandsnaam;
 
+        // Controleer of de uploads map bestaat, anders maak deze aan
+        if (!is_dir('uploads')) {
+            mkdir('uploads', 0777, true);
+        }
+
         // Verplaats de afbeelding naar de gewenste map
         move_uploaded_file($_FILES['profielFoto']['tmp_name'], $bestemmingsmap);
     } else {
-        $bestandsnaam = null; // Als er geen afbeelding is, slaan we null op
+        $bestandsnaam = ''; // Als er geen afbeelding is, sla null of een lege string op
     }
 
-    // Functie om de artiest op te slaan in de database
-    registerArtist($naam, $email, $wachtwoordHash, $bestandsnaam);
+    // Functie om de gebruiker op te slaan in de database
+    registerGebruiker($Naam, $Email, $wachtwoordHash, $bestandsnaam);
 
     // Zet een succesbericht in de sessie
     $_SESSION['status'] = 'Registratie succesvol!';
 }
 
-// Functie om de artiest op te slaan in de database
-function registerArtist($naam, $email, $wachtwoordHash, $bestandsnaam) {
+// Functie om de gebruiker op te slaan in de database
+function registerGebruiker($Naam, $Email, $WachtwoordHash, $bestandsnaam) {
     global $pdo;
 
-    // SQL-query om de artiest in de database op te slaan
-    $sql = "INSERT INTO Artist (Naam, Email, Wachtwoord, profielFoto) VALUES (?, ?, ?, ?)";
+    // Controleer of 'profielFoto' null is, anders zet lege string
+    if ($bestandsnaam === '') {
+        $bestandsnaam = '';  // Of zet hier een default foto zoals 'default.jpg'
+    }
+
+    // SQL-query om de gebruiker in de database op te slaan
+    $sql = "INSERT INTO Gebruiker (Naam, Email, Wachtwoord, profielFoto) VALUES (?, ?, ?, ?)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute([$naam, $email, $wachtwoordHash, $bestandsnaam]);
+
+    try {
+        $stmt->execute([$Naam, $Email, $WachtwoordHash, $bestandsnaam]);
+    } catch (PDOException $e) {
+        echo "Fout bij het invoegen van de gebruiker: " . $e->getMessage();
+    }
 }
 
 // Nu wordt de HTML view geladen na de logica
