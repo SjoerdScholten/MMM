@@ -1,9 +1,10 @@
+/* Algemene stijl */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #0a043c;
     color: white;
-    overflow: hidden;
+    overflow-x: hidden; /* Voorkom horizontaal scrollen */
 }
 
 .navbar {
@@ -20,20 +21,22 @@ body {
     fill: #ffffff;
 }
 
+/* De feed-sectie */
 .feed {
     padding: 15px;
+    padding-bottom: 80px; /* Zorg voor ruimte voor de footer */
 }
 
 .post {
     background-color: #1c1c3c;
     border-radius: 10px;
     margin-bottom: 20px;
-    overflow: hidden;
 }
 
 .post img {
     width: 100%;
     height: auto;
+    border-radius: 10px 10px 0 0; /* Ronde hoeken bovenin */
 }
 
 .post .content {
@@ -49,6 +52,7 @@ body {
     margin-top: 5px;
 }
 
+/* De footer */
 .footer {
     display: flex;
     justify-content: space-around;
@@ -58,6 +62,7 @@ body {
     bottom: 0;
     width: 100%;
     background-color: #0a043c;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .footer .icon {
@@ -65,3 +70,64 @@ body {
     height: 30px;
     fill: white;
 }
+
+/* Media queries voor responsiviteit */
+
+/* Voor tablets en kleinere schermen */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar .icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    .post .content {
+        padding: 10px;
+    }
+
+    .post img {
+        border-radius: 5px 5px 0 0; /* Minder scherpe hoeken op kleinere schermen */
+    }
+
+    .footer .icon {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+/* Voor mobiele telefoons (kleinere schermen) */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 10px;
+    }
+
+    .feed {
+        padding: 10px;
+        padding-bottom: 100px; /* Extra ruimte onderaan */
+    }
+
+    .post {
+        margin-bottom: 15px;
+    }
+
+    .post .content .username {
+        font-size: 14px; /* Kleinere tekstgrootte */
+    }
+
+    .post .content .text {
+        font-size: 12px; /* Kleinere tekstgrootte */
+    }
+
+    .footer .icon {
+        width: 20px;
+        height: 20px;
+    }
+}
+.content {
+    padding-bottom: 80px;
+}
+

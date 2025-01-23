@@ -43,17 +43,18 @@ function registerGebruiker($Naam, $Email, $WachtwoordHash, $bestandsnaam) {
 
     // Controleer of 'profielFoto' null is, anders zet lege string
     if ($bestandsnaam === '') {
-        $bestandsnaam = '';  // Of zet hier een default foto zoals 'default.jpg'
-    }
+        $bestandsnaam = 'media/profile.png';  // Of zet hier een default foto zoals 'default.jpg'
 
-    // SQL-query om de gebruiker in de database op te slaan
-    $sql = "INSERT INTO Gebruiker (Naam, Email, Wachtwoord, profielFoto) VALUES (?, ?, ?, ?)";
-    $stmt = $pdo->prepare($sql);
 
-    try {
-        $stmt->execute([$Naam, $Email, $WachtwoordHash, $bestandsnaam]);
-    } catch (PDOException $e) {
-        echo "Fout bij het invoegen van de gebruiker: " . $e->getMessage();
+        // SQL-query om de gebruiker in de database op te slaan
+        $sql = "INSERT INTO Gebruiker (Naam, Email, Wachtwoord, profielFoto) VALUES (?, ?, ?, ?)";
+        $stmt = $pdo->prepare($sql);
+
+        try {
+            $stmt->execute([$Naam, $Email, $WachtwoordHash, $bestandsnaam]);
+        } catch (PDOException $e) {
+            echo "Fout bij het invoegen van de gebruiker: " . $e->getMessage();
+        }
     }
 }
 
